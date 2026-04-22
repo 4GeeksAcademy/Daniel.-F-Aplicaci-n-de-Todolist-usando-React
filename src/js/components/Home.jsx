@@ -1,20 +1,28 @@
-import React from "react";
+import React, { useState } from "react"; 
 import TodoForm from "./TodoForm";
-import TodoItem from "./TodoItem";
 import TodoList from "./TodoList";
 
-//include images into your bundle
-import rigoImage from "../../img/rigo-baby.jpg";
+function Home() {
+	const [todos, setTodos] = useState([
+	]);
 
-//create your first component
-const Home = () => {
+	const addTodo = (text) => {
+		const newTodo = { id: Date.now(), text: text, isCompleted: false };
+		setTodos([...todos, newTodo]);
+	};
+
+	const deleteTodo = (id) => {
+		setTodos(todos.filter(todo => todo.id !== id));
+	};
+
 	return (
-		<div className="text-center">
-            <>TodoForm</>
-			<>TodoItem</>
-			<>TodoList</>
+		<div className="container mt-5 text-center" >
+			<h1>Lista de Tareas</h1>
+			<TodoForm addTodo={addTodo} />
+			<TodoList todos={todos} deleteTodo={deleteTodo} />
+
 		</div>
 	);
-};
+}
 
 export default Home;
