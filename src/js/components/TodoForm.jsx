@@ -5,11 +5,16 @@ function TodoForm({ addTodo }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!value) return; // No agregar tareas vacías
-    addTodo(value);
-    setValue(''); // Limpiar input
-  };
+    
+   
+    if (!value.trim()) {
+      return;
+    }
 
+    addTodo(value);
+    setValue('');
+    
+  };
   return (
     <form onSubmit={handleSubmit}>
       <input
@@ -18,7 +23,6 @@ function TodoForm({ addTodo }) {
         placeholder="Añadir nueva tarea..."
         onChange={(e) => setValue(e.target.value)}
       />
-      <button type="submit">Agregar</button>
     </form>
   );
 }
